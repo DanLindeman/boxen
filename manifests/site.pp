@@ -73,8 +73,33 @@ node default {
     ]:
   }
 
+  # general development tools
+  include iterm2::dev
+  include zsh
+  include ohmyzsh
+  include github_for_mac
+
+  # generate computer tools
+  include appcleaner
+  include daisy_disk
+
+  # additional modules needed to edit this project
   file { "${boxen::config::srcdir}/boxen":
     ensure => link,
     target => $boxen::config::repodir
   }
+  include sublime_text
+  sublime_text::package { 'Package Control':
+    source => 'wbond/sublime_package_control'
+  }
+  sublime_text::package { 'Puppet':
+    source => 'russCloak/SublimePuppet'
+  }
+  sublime_text::package { 'Google Spell Check':
+    source => 'noahcoad/google-spell-check'
+  }
+  sublime_text::package { 'MarkdownEditing':
+    source => 'SublimeText-Markdown/MarkdownEditing'
+  }
+
 }
